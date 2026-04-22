@@ -1,0 +1,14 @@
+services:
+  # Host the rendered notes site locally.
+  # - Use `docker compose up notes` to build from source (good for previewing changes).
+  # - Swap `build` for `image: ghcr.io/<owner>/note_template:latest` to pull the pre-built backup image.
+  notes:
+    image: ghcr.io/mai0313/note_template:latest
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: ["uv", "run", "zensical", "serve"]
+    ports:
+      - 127.0.0.1:9987:9987
+    restart: always
+    pull_policy: always
