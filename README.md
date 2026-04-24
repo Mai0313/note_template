@@ -3,7 +3,6 @@
 # Note Template
 
 [![publish-pages](https://github.com/Mai0313/note_template/actions/workflows/deploy.yml/badge.svg)](https://github.com/Mai0313/note_template/actions/workflows/deploy.yml)
-[![publish-image](https://github.com/Mai0313/note_template/actions/workflows/build_image.yml/badge.svg)](https://github.com/Mai0313/note_template/actions/workflows/build_image.yml)
 [![code-quality](https://github.com/Mai0313/note_template/actions/workflows/code-quality-check.yml/badge.svg)](https://github.com/Mai0313/note_template/actions/workflows/code-quality-check.yml)
 [![uv](https://img.shields.io/badge/-uv_dependency_management-2C5F2D?logo=python&logoColor=white)](https://docs.astral.sh/uv/)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
@@ -12,7 +11,7 @@
 
 </div>
 
-A production-ready **note-taking repository template** powered by [Zensical](https://zensical.org/) + GitHub Pages. Drop markdown into `docs/`, push to `main`, and the rest happens automatically: linting, publishing, and a static-site Docker image for offline backup.
+A production-ready **note-taking repository template** powered by [Zensical](https://zensical.org/) + GitHub Pages. Drop markdown into `docs/`, push to `main`, and the rest happens automatically: linting and publishing.
 
 > **Important**: This is a template repository. Do not develop directly on it. Click [Use this template](https://github.com/Mai0313/note_template/generate) to start a new notebook.
 
@@ -23,9 +22,7 @@ Other Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简�
 - **Zero-config navigation** — `docs/` layout is reflected in the sidebar automatically via `awesome-pages`.
 - **Pre-commit suite** — ruff, mdformat(+plugins), codespell, nbstripout, mypy, shellcheck, gitleaks, uv hooks. Works out of the box if you ever drop `.py`, `.rs`, `.c`, or notebook files under `docs/`.
 - **GitHub Pages deploy** — `deploy.yml` builds the site with Zensical and publishes on every push to `main`.
-- **Static-site Docker image** — `build_image.yml` ships a `ghcr.io/<owner>/<repo>:latest` image (nginx + baked-in site) for self-hosting or backup.
 - **CI hygiene** — semantic-PR checks, auto-labeler, release-drafter, dependabot auto-merge, secret & CodeQL & Trivy scans, pre-commit auto-update.
-- **Devcontainer included** — open in VS Code for a zsh + oh-my-zsh + uv environment ready to edit.
 
 ## Quick Start
 
@@ -45,7 +42,6 @@ Other Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简�
     - Update `mkdocs.yml` (`site_name`, `site_url`, `repo_name`, `repo_url`, `site_author`).
     - Update all three README files (preserve badges, only swap repo URLs).
     - Update `.github/CODEOWNERS` with your GitHub username.
-    - Update Docker labels in `docker/Dockerfile` and `.devcontainer/Dockerfile`.
 4. **Verify**:
     ```bash
     make format        # run pre-commit
@@ -79,20 +75,6 @@ nav:
 The `tags` plugin is enabled — any entry in your frontmatter's `tags:` list
 becomes a filterable tag in the sidebar.
 
-## Local Hosting via Docker
-
-A pre-built image (nginx + baked-in site) is published on every push to `main`:
-
-```bash
-# Run the already-published image
-docker run -p 8080:80 ghcr.io/YOUR_USERNAME/your_notebook:latest
-
-# Or build locally from source
-docker compose up notes          # http://127.0.0.1:8080
-```
-
-The host port is wired directly in `docker-compose.yaml` — adjust there if `8080` clashes.
-
 ## CI / CD Overview
 
 All workflows live in `.github/workflows/`. The headline ones:
@@ -100,7 +82,6 @@ All workflows live in `.github/workflows/`. The headline ones:
 | Workflow                    | Trigger                   | What it does                                 |
 | --------------------------- | ------------------------- | -------------------------------------------- |
 | `deploy.yml`                | push to `main` / tag `v*` | Build with Zensical, publish to GitHub Pages |
-| `build_image.yml`           | push to `main` / tag `v*` | Build nginx image, push to GHCR              |
 | `code-quality-check.yml`    | PR                        | Run pre-commit                               |
 | `code_scan.yml`             | push / PR                 | gitleaks + CodeQL + Trivy                    |
 | `auto_labeler.yml`          | PR                        | Apply labels from `.github/labeler.yml`      |
@@ -113,18 +94,14 @@ All workflows live in `.github/workflows/`. The headline ones:
 
 - Enable **GitHub Pages** (Settings → Pages → Source: GitHub Actions).
 - Grant **Workflow permissions: Read and write** (Settings → Actions → General).
-- Nothing else is required — `GITHUB_TOKEN` is sufficient for GHCR pushes.
 
 ## Project Layout
 
 ```
 note_template/
-├── .devcontainer/             # VS Code dev container
 ├── .github/                   # CI workflows, labels, issue templates
-├── docker/Dockerfile          # Two-stage: Zensical build → nginx
 ├── docs/
 │   └── index.md               # Landing page (add your own subdirs)
-├── docker-compose.yaml        # Local notes host
 ├── mkdocs.yml                 # Zensical / mkdocs-material config
 ├── pyproject.toml             # uv-managed docs dependencies + lint config
 └── Makefile
