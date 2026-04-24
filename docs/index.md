@@ -16,21 +16,13 @@ and is published automatically to GitHub Pages whenever you push to `main`.
     automatically by the [awesome-pages plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin).
 4. Commit and push. GitHub Actions will:
     - run `pre-commit` on every PR (markdown formatting, spell check, secret scan),
-    - publish the rendered site to GitHub Pages,
-    - push a static-site Docker image to `ghcr.io/<owner>/<repo>:latest` for offline backup.
+    - publish the rendered site to GitHub Pages.
 
 ## Previewing locally
 
 ```bash
 uv sync
 make serve                # http://0.0.0.0:9987
-```
-
-Or, to host the already-built site from a Docker image:
-
-```bash
-make build
-docker compose up notes   # http://127.0.0.1:8080
 ```
 
 ## Next steps

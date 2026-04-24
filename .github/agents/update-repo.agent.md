@@ -20,20 +20,16 @@ Content-side files (keep unchanged when syncing from template):
 
 Infrastructure files (usually safe to refresh from template):
 
-- `./.devcontainer/`
 - `./.github/workflows/`
 - `./.github/agents/`
 - `./.github/ISSUE_TEMPLATE/`
 - `./.github/cliff.toml`
 - `./.github/dependabot.yml`
 - `./.github/labeler.yml`
-- `./docker/Dockerfile`
-- `./.dockerignore`
 - `./.gitattributes`
 - `./.gitignore`
 - `./.pre-commit-config.yaml`
 - `./.python-version`
-- `./docker-compose.yaml`
 - `./LICENSE`
 - `./Makefile`
 - `./uv.lock`
