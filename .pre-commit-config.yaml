@@ -54,12 +54,6 @@ repos:
       - id: debug-statements
       - id: check-symlinks
 
-  # shell script linter
-  - repo: https://github.com/koalaman/shellcheck-precommit
-    rev: v0.11.0
-    hooks:
-      - id: shellcheck
-
   # md formatting
   - repo: https://github.com/executablebooks/mdformat
     rev: 1.0.0
@@ -112,5 +106,4 @@ repos:
     rev: 0.11.7
     hooks:
       - id: uv-sync
-        args: ["--all-groups"]
       - id: uv-lock

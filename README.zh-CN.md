@@ -35,7 +35,6 @@
     cd your_notebook
     make uv-install               # 安装 uv (每台机器只需一次)
     uv sync                       # 安装 docs toolchain
-    uv tool install pre-commit    # 安装 pre-commit
     ```
 3. **改名字**:
     - 更新 `pyproject.toml` (`name`、`description`、`project.urls`)。

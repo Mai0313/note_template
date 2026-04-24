@@ -15,7 +15,7 @@ uv-install:  ## Install uv on your system
 	@echo 'Installed uv, please re-open your bash terminal or zsh terminal.'
 
 format: ## Run pre-commit hooks
-	uv run pre-commit run -a
+	uvx pre-commit run -a
 
 serve: ## Serve the docs site locally (http://0.0.0.0:9987)
 	uv run zensical serve
