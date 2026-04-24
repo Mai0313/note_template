@@ -28,7 +28,6 @@ jobs:
       matrix:
         target:
           - name: Build and Push Images (Latest / Release)
-            target_step: prod
             tag: ghcr.io/${{ github.repository }}
 
     steps:
@@ -91,7 +90,6 @@ jobs:
           push: true
           context: .
           file: ./docker/Dockerfile
-          target: ${{ matrix.target.target_step }}
           tags: |
             ${{ steps.meta.outputs.tags }}
           sbom: false
