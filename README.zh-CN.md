@@ -22,7 +22,7 @@
 - **零配置导航** — `docs/` 底下的目录结构会自动反映到侧边栏 (通过 `awesome-pages` plugin)。
 - **Pre-commit 套件齐全** — ruff、mdformat(+plugins)、codespell、nbstripout、mypy、shellcheck、gitleaks、uv hooks。未来在 `docs/` 放 `.py`、`.rs`、`.c`、notebook 都能正常 lint。
 - **自动发布 GitHub Pages** — 每次 push `main`,`deploy.yml` 会用 Zensical build 并 publish。
-- **完整 CI 卫生** — semantic PR 标题、auto-labeler、release-drafter、dependabot auto-merge、secret/CodeQL/Trivy 扫描、pre-commit 每日自动更新。
+- **完整 CI 卫生** — semantic PR 标题、auto-labeler、release-drafter、dependabot auto-merge、secret/CodeQL 扫描、pre-commit 每日自动更新。
 
 ## Quick Start
 
@@ -80,7 +80,7 @@ nav:
 | --------------------------- | ---------------------- | ------------------------------------- |
 | `deploy.yml`                | push `main` / tag `v*` | Zensical build + 发布 GitHub Pages    |
 | `code-quality-check.yml`    | PR                     | 跑 pre-commit                         |
-| `code_scan.yml`             | push / PR              | gitleaks + CodeQL + Trivy             |
+| `code_scan.yml`             | push / PR              | gitleaks + CodeQL                     |
 | `auto_labeler.yml`          | PR                     | 根据 `.github/labeler.yml` 上 label   |
 | `auto_review_merge.yml`     | PR                     | 自动 approve + merge dependabot 的 PR |
 | `pre-commit-updater.yml`    | 每日 cron              | 更新 pre-commit hooks 版本并开 PR     |
