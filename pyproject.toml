@@ -482,29 +482,6 @@ error-on-warning = true
 # "full" | "concise" | "github" | "gitlab" | "junit"
 output-format = "concise"
 
-# ================== #
-#      Logfire       #
-# ================== #
-
-# For more info:
-# https://docs.pydantic.dev/logfire/api/logfire/#logfire.configure
-[tool.logfire]
-send_to_logfire = false
-token = false
-project_name = "note_template"
-trace_sample_rate = 1.0
-console_colors = "auto"
-console_span_style = "show-parents"
-console_include_timestamps = true
-console_verbose = true
-console_min_log_level = "debug"
-show_summary = true
-data_dir = "~/.cache/logfire"
-# base_url = ""
-collect_system_metrics = false
-id_generator = true
-fast_shutdown = true
-
 
 # ================== #
 #     CodeSpell      #
