@@ -14,7 +14,7 @@ uv-install:  ## Install uv on your system
 	@echo 'export PATH="$$HOME/.local/bin:$$PATH"' >> ~/.bashrc
 	@echo 'Installed uv, please re-open your bash terminal or zsh terminal.'
 
-format: ## Run pre-commit hooks
+fmt: ## Run pre-commit hooks
 	uvx pre-commit run -a
 
 serve: ## Serve the docs site locally (http://0.0.0.0:9987)
