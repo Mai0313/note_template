@@ -81,7 +81,7 @@ Always run `make format` before opening a pull request.
 
 ```
 note_template/
-├── .github/                   # CI workflows, labels, issue templates
+├── .github/                   # CI workflows, labels
 ├── docs/
 │   └── index.md               # Landing page (add your own subdirs)
 ├── mkdocs.yml                 # Zensical / mkdocs-material config
@@ -127,7 +127,7 @@ Allowed types:
 
 | Type       | Purpose                                                |
 | ---------- | ------------------------------------------------------ |
-| `doc`      | Documentation or content changes                       |
+| `docs`     | Documentation or content changes                       |
 | `fix`      | Correction of incorrect content or broken behavior     |
 | `feat`     | A new feature in the site or tooling                   |
 | `refactor` | Restructuring content or code without changing meaning |
@@ -173,7 +173,7 @@ All workflows live in `.github/workflows/`. The headline ones:
 
 ## Security Reports
 
-Please **do not** report security vulnerabilities through public issues. Refer to [`SECURITY.md`](./SECURITY.md) for the responsible disclosure process.
+Please **do not** report security vulnerabilities through public issues. Refer to the [security policy](https://github.com/Mai0313/note_template/security/policy) for the responsible disclosure process.
 
 ## Licensing
 
