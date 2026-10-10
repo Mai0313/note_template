@@ -20,7 +20,7 @@
 ## 主要特色
 
 - **零配置导航** — `docs/` 底下的目录结构会自动反映到侧边栏 (通过 `awesome-pages` plugin)。
-- **Pre-commit 套件齐全** — ruff、mdformat(+plugins)、codespell、nbstripout、mypy、shellcheck、gitleaks、uv hooks。未来在 `docs/` 放 `.py`、`.rs`、`.c`、notebook 都能正常 lint。
+- **Pre-commit 套件齐全** — 内置 Markdown 格式化、拼写检查与 secret 扫描;完整的 hook 清单见 [`.pre-commit-config.yaml`](.pre-commit-config.yaml)。
 - **自动发布 GitHub Pages** — 每次 push `main`,`deploy.yml` 会用 Zensical build 并 publish。
 - **完整 CI 卫生** — semantic PR 标题、auto-labeler、release-drafter、dependabot auto-merge、secret/CodeQL 扫描、pre-commit 每日自动更新。
 
@@ -47,15 +47,10 @@
     make serve         # 打开 http://0.0.0.0:9987 预览
     ```
 
-## 指令
+### Fork 后一次性配置
 
-```bash
-make help          # 列出所有 target
-make serve         # 本机预览 (http://0.0.0.0:9987)
-make build         # 把 site 渲染到 ./site
-make format        # 跑所有 pre-commit hooks
-make clean         # 清 cache 和 ./site
-```
+- 启用 **GitHub Pages** (Settings → Pages → Source: GitHub Actions)。
+- 开启 **Workflow permissions: Read and write** (Settings → Actions → General)。
 
 ## 写笔记
 
@@ -72,43 +67,9 @@ nav:
 
 `tags` plugin 已启用 — frontmatter 里的 `tags:` 会自动变成可筛选的 tag 页。
 
-## CI / CD 概览
+## 开发
 
-所有 workflow 都在 `.github/workflows/`。主要几支:
-
-| Workflow                    | 触发时机               | 做什么                                |
-| --------------------------- | ---------------------- | ------------------------------------- |
-| `deploy.yml`                | push `main` / tag `v*` | Zensical build + 发布 GitHub Pages    |
-| `code-quality-check.yml`    | PR                     | 跑 pre-commit                         |
-| `code_scan.yml`             | push / PR              | gitleaks + CodeQL                     |
-| `auto_labeler.yml`          | PR                     | 根据 `.github/labeler.yml` 上 label   |
-| `auto_review_merge.yml`     | PR                     | 自动 approve + merge dependabot 的 PR |
-| `pre-commit-updater.yml`    | 每日 cron              | 更新 pre-commit hooks 版本并开 PR     |
-| `release_drafter.yml`       | push `main`            | 维护 draft release                    |
-| `semantic-pull-request.yml` | PR                     | 强制 Conventional Commit 的 PR 标题   |
-
-### Fork 后一次性配置
-
-- 启用 **GitHub Pages** (Settings → Pages → Source: GitHub Actions)。
-- 开启 **Workflow permissions: Read and write** (Settings → Actions → General)。
-
-## 项目结构
-
-```
-note_template/
-├── .github/                   # CI workflows、labels、issue templates
-├── docs/
-│   └── index.md               # 首页 (其他子目录你自己建)
-├── mkdocs.yml                 # Zensical / mkdocs-material 配置
-├── pyproject.toml             # uv 管的 docs dependencies + lint 配置
-└── Makefile
-```
-
-## Contributing
-
-- 欢迎开 issue 或 PR。
-- PR 标题请遵守 Conventional Commits (已强制)。
-- Push 前请先 `make format`。
+贡献规范、开发环境配置、写作风格、CI workflows 与项目结构都在 [CONTRIBUTING.md](./.github/CONTRIBUTING.md)。
 
 ## License
 

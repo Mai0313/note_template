@@ -20,7 +20,7 @@ Other Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简�
 ## Highlights
 
 - **Zero-config navigation** — `docs/` layout is reflected in the sidebar automatically via `awesome-pages`.
-- **Pre-commit suite** — ruff, mdformat(+plugins), codespell, nbstripout, mypy, shellcheck, gitleaks, uv hooks. Works out of the box if you ever drop `.py`, `.rs`, `.c`, or notebook files under `docs/`.
+- **Pre-commit suite** — Markdown formatting, spell check, and secret scan out of the box; the full hook list is in [`.pre-commit-config.yaml`](.pre-commit-config.yaml).
 - **GitHub Pages deploy** — `deploy.yml` builds the site with Zensical and publishes on every push to `main`.
 - **CI hygiene** — semantic-PR checks, auto-labeler, release-drafter, dependabot auto-merge, secret & CodeQL scans, pre-commit auto-update.
 
@@ -47,15 +47,10 @@ Other Languages: [English](README.md) | [繁體中文](README.zh-TW.md) | [简�
     make serve         # preview at http://0.0.0.0:9987
     ```
 
-## Commands
+### One-time setup after forking
 
-```bash
-make help          # list all targets
-make serve         # preview the site locally (http://0.0.0.0:9987)
-make build         # render the site into ./site
-make format        # run all pre-commit hooks
-make clean         # clean caches and the ./site output
-```
+- Enable **GitHub Pages** (Settings → Pages → Source: GitHub Actions).
+- Grant **Workflow permissions: Read and write** (Settings → Actions → General).
 
 ## Writing Notes
 
@@ -74,43 +69,9 @@ nav:
 The `tags` plugin is enabled — any entry in your frontmatter's `tags:` list
 becomes a filterable tag in the sidebar.
 
-## CI / CD Overview
+## Development
 
-All workflows live in `.github/workflows/`. The headline ones:
-
-| Workflow                    | Trigger                   | What it does                                 |
-| --------------------------- | ------------------------- | -------------------------------------------- |
-| `deploy.yml`                | push to `main` / tag `v*` | Build with Zensical, publish to GitHub Pages |
-| `code-quality-check.yml`    | PR                        | Run pre-commit                               |
-| `code_scan.yml`             | push / PR                 | gitleaks + CodeQL                            |
-| `auto_labeler.yml`          | PR                        | Apply labels from `.github/labeler.yml`      |
-| `auto_review_merge.yml`     | PR                        | Auto-review and merge dependabot PRs         |
-| `pre-commit-updater.yml`    | daily cron                | Bump pre-commit hooks and open a PR          |
-| `release_drafter.yml`       | push to `main`            | Maintain a draft release from commits        |
-| `semantic-pull-request.yml` | PR                        | Enforce Conventional Commit PR titles        |
-
-### One-time setup after forking
-
-- Enable **GitHub Pages** (Settings → Pages → Source: GitHub Actions).
-- Grant **Workflow permissions: Read and write** (Settings → Actions → General).
-
-## Project Layout
-
-```
-note_template/
-├── .github/                   # CI workflows, labels, issue templates
-├── docs/
-│   └── index.md               # Landing page (add your own subdirs)
-├── mkdocs.yml                 # Zensical / mkdocs-material config
-├── pyproject.toml             # uv-managed docs dependencies + lint config
-└── Makefile
-```
-
-## Contributing
-
-- Open issues or PRs.
-- Follow Conventional Commits for PR titles (enforced).
-- `make format` before you push.
+Contribution rules, development setup, writing style, CI workflows, and the project layout live in [CONTRIBUTING.md](./.github/CONTRIBUTING.md).
 
 ## License
 

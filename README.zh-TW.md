@@ -20,7 +20,7 @@
 ## 主要特色
 
 - **零設定導覽列** — `docs/` 底下的資料夾結構直接反映到側邊欄 (透過 `awesome-pages` plugin)。
-- **Pre-commit 套件齊全** — ruff、mdformat(+plugins)、codespell、nbstripout、mypy、shellcheck、gitleaks、uv hooks。即使你未來在 `docs/` 丟 `.py`、`.rs`、`.c`、notebook 也都能正常 lint。
+- **Pre-commit 套件齊全** — 內建 Markdown 格式化、拼字檢查與 secret 掃描;完整的 hook 清單見 [`.pre-commit-config.yaml`](.pre-commit-config.yaml)。
 - **自動發佈 GitHub Pages** — 每次 push `main`,`deploy.yml` 會用 Zensical build 並 publish。
 - **完整 CI 衛生** — semantic PR 標題、auto-labeler、release-drafter、dependabot auto-merge、secret/CodeQL 掃描、pre-commit 每日自動更新。
 
@@ -47,15 +47,10 @@
     make serve         # 打開 http://0.0.0.0:9987 預覽
     ```
 
-## 指令
+### Fork 後一次性設定
 
-```bash
-make help          # 列出所有 target
-make serve         # 本機預覽 (http://0.0.0.0:9987)
-make build         # 把 site 渲染到 ./site
-make format        # 跑所有 pre-commit hooks
-make clean         # 清 cache 和 ./site
-```
+- 啟用 **GitHub Pages** (Settings → Pages → Source: GitHub Actions)。
+- 開啟 **Workflow permissions: Read and write** (Settings → Actions → General)。
 
 ## 寫筆記
 
@@ -72,43 +67,9 @@ nav:
 
 `tags` plugin 已啟用 — frontmatter 裡的 `tags:` 會自動變成可篩選的 tag 頁。
 
-## CI / CD 概覽
+## 開發
 
-所有 workflow 都在 `.github/workflows/`。主要的幾支:
-
-| Workflow                    | 觸發時機               | 做什麼                                |
-| --------------------------- | ---------------------- | ------------------------------------- |
-| `deploy.yml`                | push `main` / tag `v*` | Zensical build + 發佈 GitHub Pages    |
-| `code-quality-check.yml`    | PR                     | 跑 pre-commit                         |
-| `code_scan.yml`             | push / PR              | gitleaks + CodeQL                     |
-| `auto_labeler.yml`          | PR                     | 根據 `.github/labeler.yml` 上 label   |
-| `auto_review_merge.yml`     | PR                     | 自動 approve + merge dependabot 的 PR |
-| `pre-commit-updater.yml`    | 每日 cron              | 更新 pre-commit hooks 版本並開 PR     |
-| `release_drafter.yml`       | push `main`            | 維護 draft release                    |
-| `semantic-pull-request.yml` | PR                     | 強制 Conventional Commit 的 PR 標題   |
-
-### Fork 後一次性設定
-
-- 啟用 **GitHub Pages** (Settings → Pages → Source: GitHub Actions)。
-- 開啟 **Workflow permissions: Read and write** (Settings → Actions → General)。
-
-## 專案結構
-
-```
-note_template/
-├── .github/                   # CI workflows、labels、issue templates
-├── docs/
-│   └── index.md               # 首頁 (其他子資料夾你自己建)
-├── mkdocs.yml                 # Zensical / mkdocs-material 設定
-├── pyproject.toml             # uv 管的 docs dependencies + lint 設定
-└── Makefile
-```
-
-## Contributing
-
-- 歡迎開 issue 或 PR。
-- PR 標題請遵守 Conventional Commits (已強制)。
-- Push 前請先 `make format`。
+貢獻規範、開發環境設定、寫作風格、CI workflows 與專案結構都在 [CONTRIBUTING.md](./.github/CONTRIBUTING.md)。
 
 ## License
 

@@ -9,10 +9,12 @@ Thank you for your interest in contributing to this notes / documentation site. 
 - [Reporting Issues](#reporting-issues)
 - [Development Setup](#development-setup)
 - [Local Workflow](#local-workflow)
+- [Project Layout](#project-layout)
 - [Writing Style](#writing-style)
 - [Branching Model](#branching-model)
 - [Commit Convention](#commit-convention)
 - [Pull Request Process](#pull-request-process)
+- [CI / CD Overview](#ci--cd-overview)
 - [Code Review](#code-review)
 - [Security Reports](#security-reports)
 - [Licensing](#licensing)
@@ -75,6 +77,18 @@ make clean     # Remove caches and build artifacts
 
 Always run `make format` before opening a pull request.
 
+## Project Layout
+
+```
+note_template/
+├── .github/                   # CI workflows, labels, issue templates
+├── docs/
+│   └── index.md               # Landing page (add your own subdirs)
+├── mkdocs.yml                 # Zensical / mkdocs-material config
+├── pyproject.toml             # uv-managed docs dependencies + lint config
+└── Makefile
+```
+
 ## Writing Style
 
 - Use clear, concise language.
@@ -135,6 +149,21 @@ Reference issues with `Closes #123` or `Refs #123` when applicable.
 7. Request review only after self-review and a green CI.
 
 Pull requests are typically merged via **squash merge** to keep history linear.
+
+## CI / CD Overview
+
+All workflows live in `.github/workflows/`. The headline ones:
+
+| Workflow                    | Trigger                   | What it does                                 |
+| --------------------------- | ------------------------- | -------------------------------------------- |
+| `deploy.yml`                | push to `main` / tag `v*` | Build with Zensical, publish to GitHub Pages |
+| `code-quality-check.yml`    | PR                        | Run pre-commit                               |
+| `code_scan.yml`             | push / PR                 | gitleaks + CodeQL                            |
+| `auto_labeler.yml`          | PR                        | Apply labels from `.github/labeler.yml`      |
+| `auto_review_merge.yml`     | PR                        | Auto-review and merge dependabot PRs         |
+| `pre-commit-updater.yml`    | daily cron                | Bump pre-commit hooks and open a PR          |
+| `release_drafter.yml`       | push to `main`            | Maintain a draft release from commits        |
+| `semantic-pull-request.yml` | PR                        | Enforce Conventional Commit PR titles        |
 
 ## Code Review
 
