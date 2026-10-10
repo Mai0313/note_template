@@ -133,7 +133,7 @@ Allowed types:
 | `refactor` | Restructuring content or code without changing meaning |
 | `style`    | Formatting or stylistic changes                        |
 | `build`    | Build system changes                                   |
-| `chore`    | Build, tooling, or auxiliary changes                   |
+| `chore`    | Tooling or auxiliary changes                           |
 | `ci`       | Continuous integration changes                         |
 | `revert`   | Reverting a previous commit                            |
 
