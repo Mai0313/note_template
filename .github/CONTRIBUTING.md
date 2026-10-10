@@ -132,6 +132,7 @@ Allowed types:
 | `feat`     | A new feature in the site or tooling                   |
 | `refactor` | Restructuring content or code without changing meaning |
 | `style`    | Formatting or stylistic changes                        |
+| `build`    | Build system changes                                   |
 | `chore`    | Build, tooling, or auxiliary changes                   |
 | `ci`       | Continuous integration changes                         |
 | `revert`   | Reverting a previous commit                            |
